@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AIR TREE — Smart Eco Future</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Montserrat',sans-serif;
+      background:#07140f;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    body::-webkit-scrollbar{
+      width:10px;
+    }
+
+    body::-webkit-scrollbar-thumb{
+      background:#18c47f;
+      border-radius:20px;
+    }
+
+    .bg{
+      position:fixed;
+      width:100%;
+      height:100%;
+      background:
+      radial-gradient(circle at top,#0f2e22 0%,#07140f 60%);
+      z-index:-5;
+    }
+
+    header{
+      width:100%;
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:999;
+      backdrop-filter:blur(10px);
+      background:rgba(0,0,0,0.35);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    nav{
+      width:90%;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 0;
+    }
+
+    .logo{
+      font-size:30px;
+      font-weight:800;
+      color:#2cff9d;
+      letter-spacing:2px;
+    }
+
+    nav ul{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    nav ul li a{
+      color:white;
+      text-decoration:none;
+      transition:0.3s;
+      font-weight:500;
+    }
+
+    nav ul li a:hover{
+      color:#2cff9d;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:120px 8%;
+      gap:60px;
+      flex-wrap:wrap;
+    }
+
+    .hero-text{
+      flex:1;
+      min-width:320px;
+    }
+
+    .hero-text h1{
+      font-size:70px;
+      line-height:1.1;
+      margin-bottom:20px;
+    }
+
+    .green{
+      color:#29ff9c;
+    }
+
+    .hero-text p{
+      font-size:20px;
+      color:#d5d5d5;
+      line-height:1.8;
+      margin-bottom:35px;
+    }
+
+    .btns{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:18px 34px;
+      border-radius:50px;
+      border:none;
+      font-size:16px;
+      cursor:pointer;
+      font-weight:700;
+      transition:0.4s;
+    }
+
+    .btn-primary{
+      background:#27ff9d;
+      color:#04110c;
+      box-shadow:0 0 25px rgba(39,255,157,0.5);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-5px);
+    }
+
+    .btn-secondary{
+      background:transparent;
+      border:2px solid #2cff9d;
+      color:#2cff9d;
+    }
+
+    .btn-secondary:hover{
+      background:#2cff9d;
+      color:#000;
+    }
+
+    .hero-image{
+      flex:1;
+      display:flex;
+      justify-content:center;
+      min-width:300px;
+    }
+
+    .hero-image img{
+      width:100%;
+      max-width:520px;
+      border-radius:30px;
+      box-shadow:0 0 60px rgba(41,255,156,0.25);
+      animation:float 5s ease-in-out infinite;
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateY(0px);
+      }
+      50%{
+        transform:translateY(-18px);
+      }
+      100%{
+        transform:translateY(0px);
+      }
+    }
+
+    section{
+      padding:120px 8%;
+    }
+
+    .title{
+      text-align:center;
+      margin-bottom:70px;
+    }
+
+    .title h2{
+      font-size:52px;
+      margin-bottom:15px;
+    }
+
+    .title p{
+      color:#b8b8b8;
+      font-size:18px;
+      max-width:800px;
+      margin:auto;
+      line-height:1.7;
+    }
+
+    .problem-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      padding:40px 30px;
+      border-radius:28px;
+      transition:0.4s;
+      backdrop-filter:blur(10px);
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+      border-color:#27ff9d;
+      box-shadow:0 0 40px rgba(39,255,157,0.15);
+    }
+
+    .card h3{
+      margin-top:20px;
+      margin-bottom:15px;
+      font-size:26px;
+    }
+
+    .card p{
+      color:#d0d0d0;
+      line-height:1.7;
+    }
+
+    .icon{
+      font-size:60px;
+    }
+
+    .impact{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .impact-box{
+      padding:45px;
+      border-radius:25px;
+      background:linear-gradient(
+      145deg,
+      rgba(34,255,157,0.15),
+      rgba(255,255,255,0.03)
+      );
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .impact-box h3{
+      font-size:30px;
+      margin-bottom:18px;
+    }
+
+    .impact-box p{
+      line-height:1.8;
+      color:#d5d5d5;
+    }
+
+    .tech{
+      display:flex;
+      gap:50px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .tech-image{
+      flex:1;
+      min-width:300px;
+    }
+
+    .tech-image img{
+      width:100%;
+      border-radius:30px;
+      box-shadow:0 0 50px rgba(0,0,0,0.4);
+    }
+    .tech-image{
+  flex:1;
+  min-width:300px;
+  position:relative;
+}
+
+.tech-image img{
+  width:100%;
+  border-radius:30px;
+  box-shadow:0 0 50px rgba(0,0,0,0.4);
+}
+
+.floating-info{
+  position:absolute;
+  bottom:-30px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  justify-content:center;
+  width:100%;
+}
+
+.mini-card{
+  background:rgba(10,25,18,0.95);
+  border:1px solid rgba(44,255,157,0.3);
+  backdrop-filter:blur(10px);
+  padding:18px 22px;
+  border-radius:18px;
+  min-width:170px;
+  text-align:center;
+  box-shadow:0 0 20px rgba(44,255,157,0.15);
+}
+
+.mini-card h4{
+  color:#2cff9d;
+  margin-bottom:8px;
+  font-size:18px;
+}
+
+.mini-card p{
+  color:#d8d8d8;
+  font-size:14px;
+  line-height:1.5;
+}
+
+    .tech-content{
+      flex:1;
+      min-width:300px;
+    }
+
+    .tech-item{
+      margin-bottom:30px;
+      padding:25px;
+      background:rgba(255,255,255,0.03);
+      border-radius:20px;
+      border-left:5px solid #2cff9d;
+    }
+
+    .tech-item h3{
+      margin-bottom:10px;
+      font-size:24px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:30px;
+      text-align:center;
+    }
+
+    .stat{
+      padding:50px 20px;
+      border-radius:25px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.07);
+    }
+
+    .stat h2{
+      font-size:60px;
+      color:#2cff9d;
+      margin-bottom:10px;
+    }
+
+    .app{
+      background:
+      linear-gradient(
+      135deg,
+      rgba(39,255,157,0.12),
+      rgba(255,255,255,0.03)
+      );
+      border-radius:35px;
+      padding:60px;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .app-flex{
+      display:flex;
+      gap:60px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .phone{
+      width:320px;
+      background:#0c1d16;
+      border-radius:40px;
+      padding:25px;
+      border:8px solid #202020;
+      box-shadow:0 0 50px rgba(0,0,0,0.5);
+    }
+
+    .screen{
+      background:linear-gradient(to bottom,#0d3323,#07140f);
+      border-radius:25px;
+      padding:30px;
+      min-height:580px;
+    }
+
+    .screen h2{
+      color:#2cff9d;
+      margin-bottom:25px;
+      font-size:28px;
+    }
+
+    .measure{
+      background:rgba(255,255,255,0.05);
+      padding:20px;
+      border-radius:20px;
+      margin-bottom:20px;
+    }
+
+    .measure h3{
+      font-size:18px;
+      margin-bottom:10px;
+    }
+
+    .measure p{
+      font-size:32px;
+      font-weight:700;
+      color:#2cff9d;
+    }
+
+    .app-text{
+      flex:1;
+      min-width:300px;
+    }
+
+    .app-text h2{
+      font-size:50px;
+      margin-bottom:20px;
+    }
+
+    .app-text p{
+      line-height:1.9;
+      color:#d7d7d7;
+      margin-bottom:20px;
+    }
+
+    .future{
+      text-align:center;
+    }
+
+    .future h2{
+      font-size:60px;
+      margin-bottom:30px;
+    }
+
+    .future p{
+      max-width:950px;
+      margin:auto;
+      line-height:2;
+      color:#d4d4d4;
+      font-size:20px;
+    }
+
+    .quote{
+      margin-top:60px;
+      font-size:36px;
+      font-weight:700;
+      color:#2cff9d;
+      line-height:1.5;
+    }
+
+    footer{
+      padding:60px 8%;
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,0.08);
+      margin-top:100px;
+    }
+
+    footer h2{
+      font-size:36px;
+      color:#2cff9d;
+      margin-bottom:20px;
+    }
+
+    footer p{
+      color:#c8c8c8;
+      line-height:1.8;
+    }
+
+    @media(max-width:900px){
+
+      .hero-text h1{
+        font-size:48px;
+      }
+
+      .title h2{
+        font-size:40px;
+      }
+
+      .future h2{
+        font-size:42px;
+      }
+
+      .app{
+        padding:35px;
+      }
+
+      nav ul{
+        display:none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+
+<header>
+  <nav>
+    <div class="logo">AIR TREE</div>
+
+    <ul>
+      <li><a href="#problem">Проблема</a></li>
+      <li><a href="#solution">Решение</a></li>
+      <li><a href="#technology">Технологии</a></li>
+      <li><a href="#app">Приложение</a></li>
+      <li><a href="#future">Будущее</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+
+  <div class="hero-text">
+
+    <h1>
+      Искусственные <span class="green">эко-деревья</span>
+      для очистки воздуха будущего
+    </h1>
+
+    <p>
+      AIR TREE — инновационный экологический проект,
+      который помогает бороться со смогом,
+      жарой и загрязнением воздуха в городах Казахстана.
+      Система работает на солнечной энергии,
+      использует мох и AI-датчики
+      для анализа качества воздуха в реальном времени.
+    </p>
+
+    <div class="btns">
+      <button class="btn btn-primary">Наш проект</button>
+      <button class="btn btn-secondary">Смотреть технологии</button>
+    </div>
+
+  </div>
+
+  <div class="hero-image">
+    <img src="/mnt/data/WhatsApp Image 2026-05-27 at 15.15.07.jpeg" alt="">
+  </div>
+
+</section>
+
+<section id="problem">
+
+  <div class="title">
+    <h2>🔥 Проблема</h2>
+
+    <p>
+      В крупных городах Казахстана воздух становится всё грязнее.
+      Смог, пыль и высокая температура влияют на здоровье людей
+      и разрушают экосистему города.
+    </p>
+  </div>
+
+  <div class="problem-grid">
+
+    <div class="card">
+      <div class="icon">🌫</div>
+      <h3>Смог</h3>
+
+      <p>
+        Алматы и другие крупные города часто покрываются смогом.
+        Загрязнение воздуха увеличивает риск заболеваний.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏭</div>
+      <h3>CO₂ и выбросы</h3>
+
+      <p>
+        Машины и заводы ежедневно выбрасывают тысячи тонн
+        загрязняющих веществ в атмосферу.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🌡</div>
+      <h3>Жара</h3>
+
+      <p>
+        Летом города сильно нагреваются,
+        а нехватка зелени ухудшает климат.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🌳</div>
+      <h3>Мало деревьев</h3>
+
+      <p>
+        Настоящие деревья растут долго,
+        а проблему загрязнения нужно решать уже сейчас.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section id="solution">
+
+  <div class="title">
+    <h2>🌱 Решение — AIR TREE</h2>
+
+    <p>
+      AIR TREE — это футуристичная станция очистки воздуха,
+      которая объединяет экологию, технологии и AI.
+    </p>
+  </div>
+
+  <div class="impact">
+
+    <div class="impact-box">
+      <h3>💨 Очистка воздуха</h3>
+
+      <p>
+        Специальный мох и фильтры собирают пыль,
+        очищают воздух и уменьшают количество вредных частиц.
+      </p>
+    </div>
+
+    <div class="impact-box">
+      <h3>☀ Солнечная энергия</h3>
+
+      <p>
+        Верхняя часть AIR TREE покрыта солнечными панелями,
+        поэтому система работает автономно и экологично.
+      </p>
+    </div>
+
+    <div class="impact-box">
+      <h3>🧠 AI-система</h3>
+
+      <p>
+        Искусственный интеллект анализирует качество воздуха,
+        температуру и уровень загрязнения.
+      </p>
+    </div>
+
+    <div class="impact-box">
+      <h3>📡 Умный мониторинг</h3>
+
+      <p>
+        Датчики показывают данные в реальном времени:
+        AQI, CO₂, влажность, температура и уровень пыли.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section id="technology">
+
+  <div class="title">
+    <h2>⚡ Как работает технология</h2>
+
+    <p>
+      AIR TREE сочетает биологические материалы,
+      умные датчики и экологичную энергию.
+    </p>
+  </div>
+
+  <div class="tech">
+
+    <div class="tech-image">
+
+  <img 
+  src="WhatsApp Image 2026-05-27 at 15.15.07.jpeg" 
+  alt="AIR TREE">
+
+  <div class="floating-info">
+      <div class="mini-card">
+          <h4>CO₂ Filter</h4>
+          <p>Активная очистка воздуха</p>
+      </div>
+
+      <div class="mini-card">
+          <h4>Solar Energy</h4>
+          <p>Питание от солнца</p>
+      </div>
+
+      <div class="mini-card">
+          <h4>AI Sensors</h4>
+          <p>Анализ воздуха 24/7</p>
+      </div>
+  </div>
+
+</div>
+
+    <div class="tech-content">
+
+      <div class="tech-item">
+        <h3>🌿 Мох</h3>
+
+        <p>
+          Мох очищает воздух эффективнее некоторых деревьев,
+          удерживает влагу и собирает пыль.
+        </p>
+      </div>
+
+      <div class="tech-item">
+        <h3>📊 Датчики воздуха</h3>
+
+        <p>
+          AIR TREE измеряет:
+          PM2.5,
+          PM10,
+          CO₂,
+          температуру,
+          влажность
+          и качество воздуха.
+        </p>
+      </div>
+
+      <div class="tech-item">
+        <h3>🖥 LED экран</h3>
+
+        <p>
+          На встроенном дисплее отображаются показатели воздуха
+          и экологическая статистика города.
+        </p>
+      </div>
+
+      <div class="tech-item">
+        <h3>☀ Solar Power</h3>
+
+        <p>
+          Система питается от солнечной энергии,
+          что делает её полностью экологичной.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section>
+
+  <div class="title">
+    <h2>📈 Польза для города</h2>
+
+    <p>
+      AIR TREE может стать частью экосистемы умного города будущего.
+    </p>
+  </div>
+
+  <div class="stats">
+
+    <div class="stat">
+      <h2>30+</h2>
+      <p>деревьев заменяет одно AIR TREE</p>
+    </div>
+
+    <div class="stat">
+      <h2>24/7</h2>
+      <p>мониторинг воздуха</p>
+    </div>
+
+    <div class="stat">
+      <h2>100%</h2>
+      <p>солнечная энергия</p>
+    </div>
+
+    <div class="stat">
+      <h2>-40%</h2>
+      <p>уменьшение пыли рядом</p>
+    </div>
+
+  </div>
+
+</section>
+
+<section id="app">
+
+  <div class="title">
+    <h2>📱 Мобильное приложение</h2>
+
+    <p>
+      Отдельное приложение показывает экологическую ситуацию
+      в определённой местности в реальном времени.
+    </p>
+  </div>
+
+  <div class="app">
+
+    <div class="app-flex">
+
+      <div class="phone">
+
+        <div class="screen">
+
+          <h2>AIR TREE APP</h2>
+
+          <div class="measure">
+            <h3>Температура</h3>
+            <p>26°C</p>
+          </div>
+
+          <div class="measure">
+            <h3>Качество воздуха</h3>
+            <p>36 AQI</p>
+          </div>
+
+          <div class="measure">
+            <h3>Поглощено CO₂</h3>
+            <p>389 ppm</p>
+          </div>
+
+          <div class="measure">
+            <h3>Влажность</h3>
+            <p>65%</p>
+          </div>
+
+          <div class="measure">
+            <h3>PM2.5</h3>
+            <p>12</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="app-text">
+
+        <h2>
+          Умный контроль воздуха
+          через приложение
+        </h2>
+
+        <p>
+          Пользователь может открыть карту города
+          и увидеть уровень загрязнения воздуха
+          в конкретном районе.
+        </p>
+
+        <p>
+          Приложение показывает:
+        </p>
+
+        <p>
+          ✅ температуру
+          <br>
+          ✅ уровень CO₂
+          <br>
+          ✅ влажность
+          <br>
+          ✅ количество очищенного воздуха
+          <br>
+          ✅ AI-прогноз загрязнения
+          <br>
+          ✅ экологическую карту города
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="future">
+
+  <div class="future">
+
+    <h2>🏙 Город будущего</h2>
+
+    <p>
+      AIR TREE может устанавливаться возле школ,
+      торговых центров, парков,
+      автобусных остановок и оживлённых улиц.
+      Такие станции способны сделать города
+      Казахстана чище, прохладнее и безопаснее.
+    </p>
+
+    <div class="quote">
+      “Если городам не хватает лесов,
+      мы можем принести лесные технологии
+      прямо в город.”
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+
+  <h2>AIR TREE</h2>
+
+  <p>
+    Smart Eco Technology For Kazakhstan Future
+    <br><br>
+    Проект объединяет экологию,
+    инновации и технологии будущего.
+  </p>
+
+</footer>
+
+</body>
+</html>
